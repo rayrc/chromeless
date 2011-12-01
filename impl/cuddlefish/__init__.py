@@ -352,7 +352,7 @@ def killProcessByName(name):
 
         if process.find(name) != -1:
             print "killing pid: %s" % pid
-            os.kill(int(pid), signal.SIGHUP)
+            os.kill(int(pid), signal.SIGTERM)
             break
 
 

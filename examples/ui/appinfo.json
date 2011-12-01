@@ -1,4 +1,8 @@
 {
-  "name": "Chromeless UI",
-  "version": "0.1" 
+    "build_id": "20110627113735", 
+    "vendor": "Unknown", 
+    "name": "Chromeless UI", 
+    "developer_email": "unknown@unknown.com", 
+    "module_dirs": [], 
+    "version": "0.1"
 }

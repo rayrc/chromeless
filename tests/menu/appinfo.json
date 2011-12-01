@@ -1,4 +1,8 @@
 {
-  "name": "My Menu Interactor",
-  "version": "0.1"
+    "build_id": "20110627113902", 
+    "vendor": "Unknown", 
+    "name": "My Menu Interactor", 
+    "developer_email": "unknown@unknown.com", 
+    "module_dirs": [], 
+    "version": "0.1"
 }

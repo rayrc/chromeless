@@ -244,3 +244,7 @@ exports.rmdir = function rmdir(path) {
     throw new Error("The directory is not empty: " + path);
   }
 };
+
+exports["get"] = function(path) {
+    return MozFile(path);
+};

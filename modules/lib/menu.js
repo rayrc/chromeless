@@ -150,24 +150,24 @@ var Menu = function(struct) {
         disabled  = this.disabled,
         name      = this.name;
     ["label", "hotkey", "image", "type", "disabled"].forEach(function(prop) {
-        this.__defineGetter__(prop, function() { return eval(prop); });
-        this.__defineSetter__(prop, function(val) {
+        _self.__defineGetter__(prop, function() { return eval(prop); });
+        _self.__defineSetter__(prop, function(val) {
             eval(prop + " = val");
-            if (!this.drawn || this.children.length)
+            if (!_self.drawn || _self.children.length)
                 return;
             if (prop == "hotkey")
-                return this.setHotkey();
-            this.node.setAttribute(propMap[prop] || prop, val);
+                return _self.setHotkey();
+            _self.node.setAttribute(propMap[prop] || prop, val);
         });
     });
 
     ["checked", "autocheck", "name"].forEach(function(prop) {
-        this.__defineGetter__(prop, function() { return eval(prop); });
-        this.__defineSetter__(prop, function(val) {
+        _self.__defineGetter__(prop, function() { return eval(prop); });
+        _self.__defineSetter__(prop, function(val) {
             eval(prop + " = val");
-            if (!this.drawn || this.children.length || "checkbox|radio".indexOf(val) === -1)
+            if (!_self.drawn || _self.children.length || "checkbox|radio".indexOf(val) === -1)
                 return;
-            this.node.setAttribute(propMap[prop] || prop, val);
+            _self.node.setAttribute(propMap[prop] || prop, val);
         });
     });
 };
@@ -283,6 +283,10 @@ var Menu = function(struct) {
         delete this.node;
         this.drawn = false;
     };
+    
+    this.indexOf = function(node) {
+        return -1;
+    };
 
     /*
      * @see setParent()
@@ -385,8 +389,10 @@ var SubMenu = function(nodes, parent) {
      * length of the array.
      */
     this.push = function() {
-        var args = _slice.call(arguments);
+        let args = _slice.call(arguments);
         for (let i = 0, l = args.length; i < l; ++i) {
+            if (!args[i])
+                continue;
             this[this.length] = args[i];
             ++this.length;
             args[i].setParent(this);
@@ -433,9 +439,9 @@ var SubMenu = function(nodes, parent) {
      */
     this.fromArray = function(arr) {
         let i, l, el, next;
-        for (i = 0, l = this.length; i < l; ++i) {
-            if (arr.indexOf(this[i]) > -1)
-                this[i].destroy();
+        for (i = this.length - 1; i >= 0; --i) {
+            //if (arr.indexOf(this[i]) > -1)
+            this[i].destroy();
             delete this[i];
         }
         this.length = 0;
@@ -444,6 +450,21 @@ var SubMenu = function(nodes, parent) {
             next = arr[i + 1];
             this.push(el);
         }
+    };
+    
+    this.indexOf = function(node) {
+        let str = (typeof node == "string"),
+            idx = -1;
+        for (let i = 0, l = this.length; i < l; ++i) {
+            idx = str && this[i].name && this[i].name == node 
+                ? idx 
+                : this[i] === node 
+                    ? idx 
+                    : -1;
+            if (idx > -1)
+                return idx;
+        }
+        return idx;
     };
 
     /**
@@ -522,6 +543,10 @@ var Separator = function(parent) {
         this.parentNode.removeChild(this.node);
         delete this.node;
         this.drawn = false;
+    };
+    
+    this.indexOf = function(node) {
+        return -1;
     };
 
     /**

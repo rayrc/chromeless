@@ -3,3 +3,14 @@ contract @mozilla.org/harness-service;1?id=6724fc1b-3ec4-40e2-8583-8061088b3185 
 category app-startup Harness_Service_for_6724fc1b-3ec4-40e2-8583-8061088b3185 @mozilla.org/harness-service;1?id=6724fc1b-3ec4-40e2-8583-8061088b3185
 
 content chromeless chromeless/content/
+
+# Enigmail IPC stuff
+## Gecko 2.0 interface specifiacations
+interfaces  components/ipc.xpt
+
+## Gecko 2.0 binary components
+binary-component components/linux/libipc-x86-gcc3.so ABI=Linux_x86-gcc3
+binary-component components/linux/libipc-x86_64-gcc3.so ABI=Linux_x86_64-gcc3
+binary-component components/win/ipc-x86-msvc.dll ABI=WINNT_x86-msvc
+binary-component components/mac/libipc-x86_64-gcc3.dylib ABI=Darwin_x86_64-gcc3
+binary-component components/mac/libipc-x86-gcc3.dylib ABI=Darwin_x86-gcc3

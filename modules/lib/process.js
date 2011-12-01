@@ -24,3 +24,9 @@ exports.cwd = function cwd() {
          .getService(Ci.nsIDirectoryServiceProvider)
          .getFile("CurWorkD",{}).path;
 };
+
+exports.home = function home() {
+    return Cc["@mozilla.org/file/directory_service;1"]
+         .getService(Ci.nsIDirectoryServiceProvider)
+         .getFile("Home",{}).path;
+}

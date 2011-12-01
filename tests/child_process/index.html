@@ -1,6 +1,18 @@
 <script type="text/javascript">
-  require('child_process').spawn('/bin/echo', 'abc')
-  setTimeout(function() {
-    require('process').exit()
-  }, 1000);
+  var child_process = require("child_process");
+  var ps = child_process.spawn("/bin/echo", ["$@", "$ENV_TEST"], {
+      env: ["ENV_TEST=OK"]
+  });
+  ps.stdout.on("data", function(data) {
+      console.log("STDOUT:", data);
+  });
+  ps.stderr.on("data", function(data) {
+      console.log("STDERR:", data);
+  });
+  ps.on("exit", function(code) {
+      console.log("exited with code " + code);
+  });
+  
+  ps.stdin.write("OK");
+  ps.stdin.end();
 </script>
