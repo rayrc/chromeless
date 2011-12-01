@@ -5,12 +5,21 @@ category app-startup Harness_Service_for_6724fc1b-3ec4-40e2-8583-8061088b3185 @m
 content chromeless chromeless/content/
 
 # Enigmail IPC stuff
-## Gecko 2.0 interface specifiacations
+## Gecko 2.0 interface specifications
 interfaces  components/ipc.xpt
 
 ## Gecko 2.0 binary components
-binary-component components/linux/libipc-x86-gcc3.so ABI=Linux_x86-gcc3
-binary-component components/linux/libipc-x86_64-gcc3.so ABI=Linux_x86_64-gcc3
-binary-component components/win/ipc-x86-msvc.dll ABI=WINNT_x86-msvc
-binary-component components/mac/libipc-x86_64-gcc3.dylib ABI=Darwin_x86_64-gcc3
-binary-component components/mac/libipc-x86-gcc3.dylib ABI=Darwin_x86-gcc3
+
+# Firefox 5, 6
+binary-component components/mac/gecko-6/libipc-x86_64-gcc3.dylib ABI=Darwin_x86_64-gcc3 appversion<=6.*
+binary-component components/mac/gecko-6/libipc-x86-gcc3.dylib ABI=Darwin_x86-gcc3 appversion<=6.*
+binary-component components/linux/gecko-6/libipc-x86-gcc3.so ABI=Linux_x86-gcc3 appversion<=6.*
+binary-component components/linux/gecko-6/libipc-x86_64-gcc3.so ABI=Linux_x86_64-gcc3 appversion<=6.*
+binary-component components/win/gecko-6/ipc-x86-msvc.dll ABI=WINNT_x86-msvc appversion<=6.*
+
+# Firefox 7+
+binary-component components/mac/gecko-7/libipc-x86_64-gcc3.dylib ABI=Darwin_x86_64-gcc3 application={3550f703-e582-4d05-9a08-453d09bdfdc6} appversion>6.*
+binary-component components/mac/gecko-7/libipc-x86-gcc3.dylib ABI=Darwin_x86-gcc3 application={3550f703-e582-4d05-9a08-453d09bdfdc6} appversion>6.*
+binary-component components/linux/gecko-7/libipc-x86-gcc3.so ABI=Linux_x86-gcc3 application={3550f703-e582-4d05-9a08-453d09bdfdc6} appversion>6.*
+binary-component components/linux/gecko-7/libipc-x86_64-gcc3.so ABI=Linux_x86_64-gcc3 application={3550f703-e582-4d05-9a08-453d09bdfdc6} appversion>6.*
+binary-component components/win/gecko-7/ipc-x86-msvc.dll ABI=WINNT_x86-msvc application={3550f703-e582-4d05-9a08-453d09bdfdc6} appversion>6.*
